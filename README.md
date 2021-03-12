@@ -22,8 +22,3 @@ pip install -r requirements.txt
 
 - Dans le portail AZURE aller sur l'application puis dans le "Centre de déploiement"
 - Cliquer sur Redéployer/synchroniser
-
-
-
-
-

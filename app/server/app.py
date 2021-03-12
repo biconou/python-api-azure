@@ -7,6 +7,7 @@ app = FastAPI()
 async def read_root():
     return {"message": "Welcome to this fantastic app!"}
 
+
 @app.get("/customer/{customer_id}")
 async def get_customer(customer_id):
     return {"CustomerID": customer_id}

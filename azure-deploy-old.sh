@@ -5,7 +5,7 @@ set -euo pipefail
 # Make sure these values are correct for your environment
 resourceGroup="dm-api-01"
 appName="dm-api-01"
-location="WestUS2" 
+location="WestUS2"
 
 # Change this if you are using your own github repository
 gitSource="https://github.com/Azure-Samples/azure-sql-db-python-rest-api.git"
