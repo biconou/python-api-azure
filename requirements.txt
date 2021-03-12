@@ -1,5 +1,5 @@
-flask
-flask-restful
+fastapi
+uvicorn
 opencensus-ext-azure
 opencensus-ext-flask
 tenacity

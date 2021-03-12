@@ -2,20 +2,22 @@
 
 set -euo pipefail
 
-# Make sure these values are correct for your environment
-resourceGroup="everie-rg"
-appName="python-api-sample"
-#location="NorthCentralUS"
-
-
-# Change this if you are using your own github repository
 gitSource="https://github.com/biconou/python-api-azure.git"
-gitBranch="work-in-progress"
+gitBranch=`git branch --show-current`
+echo ${gitBranch}
+gitBranchSlug=`echo ${gitBranch} | tr -d '/'`
+echo ${gitBranchSlug}
 
-# echo "Creating Resource Group...";
-# az group create \
-#     -n $resourceGroup \
-#     -l $location
+# Make sure these values are correct for your environment
+resourceGroup="everie-${gitBranchSlug}-rg"
+appName="python-api-sample-${gitBranchSlug}"
+location="francecentral"
+
+
+echo "Creating Resource Group...";
+az group create \
+    -n $resourceGroup \
+    -l $location
 
 echo "Creating Application Service Plan...";
 az appservice plan create \
