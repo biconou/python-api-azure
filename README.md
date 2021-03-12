@@ -14,4 +14,16 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Créer l'application dans AZURE
+
+./azure-deploy.sh
+
+## Mettre à jour l'application
+
+- Dans le portail AZURE aller sur l'application puis dans le "Centre de déploiement"
+- Cliquer sur Redéployer/synchroniser
+
+
+
+
 

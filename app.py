@@ -24,7 +24,7 @@ parser.add_argument('customer')
 # Customer Class
 class Customer(Resource):
     def get(self, customer_id):     
-        customer = {"CustomerID": "toto"}
+        customer = {"CustomerID": customer_id}
         return customer, 200
     
 # Create API route to defined Customer class
