@@ -4,12 +4,13 @@ set -euo pipefail
 
 # Make sure these values are correct for your environment
 resourceGroup="palo-it-lyon"
-appName="dm-api-01"
-location="WestUS2" 
+appName="python-api-sample"
+location="WestUS2"
+
 
 # Change this if you are using your own github repository
 gitSource="https://github.com/biconou/python-api-azure.git"
-
+gitBranch="work-in-progress"
 
 # echo "Creating Resource Group...";
 # az group create \
@@ -40,14 +41,7 @@ az webapp create \
     --plan "linux-plan" \
     --runtime "PYTHON|3.7" \
     --deployment-source-url $gitSource \
-    --deployment-source-branch master
-
-echo "Configuring Connection String...";
-az webapp config connection-string set \
-    -g $resourceGroup \
-    -n $appName \
-    --settings WWIF="$SQLAZURECONNSTR_WWIF" \
-    --connection-string-type=SQLAzure
+    --deployment-source-branch $gitBranch
 
 echo "Configuring Application Insights...";
 az webapp config appsettings set \
