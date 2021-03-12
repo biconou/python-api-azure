@@ -3,7 +3,6 @@ import os
 from flask import Flask
 from flask_restful import reqparse, Api, Resource
 import json
-import pyodbc
 
 # This is a simplified example that only support GET request.
 # It is meant to help you to get you started if you're new to development
@@ -21,18 +20,12 @@ api = Api(app)
 parser = reqparse.RequestParser()
 parser.add_argument('customer')
 
-# Create connection to Azure SQL
-conn = pyodbc.connect(os.environ['SQLAZURECONNSTR_WWIF'])
 
 # Customer Class
 class Customer(Resource):
     def get(self, customer_id):     
         customer = {"CustomerID": customer_id}
-        cursor = conn.cursor()    
-        cursor.execute("EXEC web.get_customer ?", json.dumps(customer))
-        result = json.loads(cursor.fetchone()[0])        
-        cursor.close()
-        return result, 200
+        return customer, 200
     
 # Create API route to defined Customer class
 api.add_resource(Customer, '/customer', '/customer/<customer_id>')
