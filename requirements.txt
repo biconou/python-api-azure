@@ -1,4 +1,3 @@
-pyodbc
 flask
 flask-restful
 opencensus-ext-azure

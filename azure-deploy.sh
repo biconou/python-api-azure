@@ -3,25 +3,18 @@
 set -euo pipefail
 
 # Make sure these values are correct for your environment
-resourceGroup="dm-api-01"
+resourceGroup="palo-it-lyon"
 appName="dm-api-01"
 location="WestUS2" 
 
 # Change this if you are using your own github repository
-gitSource="https://github.com/Azure-Samples/azure-sql-db-python-rest-api.git"
+gitSource="https://github.com/biconou/python-api-azure.git"
 
-# Make sure connection string variable is set
 
-if [[ -z "${SQLAZURECONNSTR_WWIF:-}" ]]; then
-	echo "Plase export Azure SQL connection string:";
-    echo "export SQLAZURECONNSTR_WWIF=\"your-connection-string-here\"";
-	exit 1;
-fi
-
-echo "Creating Resource Group...";
-az group create \
-    -n $resourceGroup \
-    -l $location
+# echo "Creating Resource Group...";
+# az group create \
+#     -n $resourceGroup \
+#     -l $location
 
 echo "Creating Application Service Plan...";
 az appservice plan create \
