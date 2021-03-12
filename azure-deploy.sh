@@ -43,7 +43,8 @@ az webapp create \
     --plan "linux-plan" \
     --runtime "PYTHON|3.7" \
     --deployment-source-url $gitSource \
-    --deployment-source-branch $gitBranch
+    --deployment-source-branch $gitBranch \
+    --startup-file startup.sh
 
 echo "Configuring Application Insights...";
 az webapp config appsettings set \
