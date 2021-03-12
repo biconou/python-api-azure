@@ -3,9 +3,9 @@
 set -euo pipefail
 
 # Make sure these values are correct for your environment
-resourceGroup="palo-it-lyon"
+resourceGroup="everie-rg"
 appName="python-api-sample"
-location="WestUS2"
+#location="NorthCentralUS"
 
 
 # Change this if you are using your own github repository
