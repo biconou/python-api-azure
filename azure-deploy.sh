@@ -52,4 +52,14 @@ az webapp config appsettings set \
     -n $appName \
     --settings APPINSIGHTS_KEY="$aikey"
 
+echo "Creating Cosmos DB account...";
+az cosmosdb create \
+    -n $appName \
+    -g $resourceGroup \
+    --locations regionName=francecentral isZoneRedundant=False
+
+echo "Retrieving Cosmos DB Connection String";
+
+
+
 echo "Done."
