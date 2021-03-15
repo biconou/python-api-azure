@@ -8,6 +8,9 @@ authors = ["Remi Cocula <rcocula@palo-it.com", "Yoann Couble <ycouble@palo-it.co
 python = ">=3.7"
 fastapi = "^0.63.0"
 uvicorn = "^0.13.4"
+pymongo = "^3.11.3"
+pydantic = "^1.8.1"
+motor = "^2.3.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
