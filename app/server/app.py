@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.server.routes.pschit import router as PschitRouter
+from server.routes.pschit import router as PschitRouter
 
 app = FastAPI()
 

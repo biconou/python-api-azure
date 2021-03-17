@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 
-from app.server.database import (
+from server.database import (
     add_pschit,
     delete_pschit,
     retrieve_pschit,
     retrieve_pschits,
     update_pschit,
 )
-from app.server.models.pschit import (
+from server.models.pschit import (
     ErrorResponseModel,
     ResponseModel,
     PschitSchema,

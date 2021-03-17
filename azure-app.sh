@@ -2,22 +2,7 @@
 
 set -euo pipefail
 
-gitSource="https://github.com/biconou/python-api-azure.git"
-gitBranch=`git branch --show-current`
-echo ${gitBranch}
-gitBranchSlug=`echo ${gitBranch} | tr -d '/'`
-echo ${gitBranchSlug}
-
-# Make sure these values are correct for your environment
-resourceGroup="everie-${gitBranchSlug}-rg"
-appName="python-api-sample-${gitBranchSlug}"
-location="francecentral"
-
-
-echo "Creating Resource Group...";
-az group create \
-    -n $resourceGroup \
-    -l $location
+. ./env-azure.sh
 
 echo "Creating Application Service Plan...";
 az appservice plan create \
@@ -46,20 +31,14 @@ az webapp create \
     --deployment-source-branch $gitBranch \
     --startup-file startup.sh
 
+COSMOSDB_PRIMARY_CONNECTION_STRING=`./azure-cosmosdb-connection-string.sh`
+
 echo "Configuring Application Insights...";
 az webapp config appsettings set \
     -g $resourceGroup \
     -n $appName \
-    --settings APPINSIGHTS_KEY="$aikey"
-
-echo "Creating Cosmos DB account...";
-az cosmosdb create \
-    -n $appName \
-    -g $resourceGroup \
-    --locations regionName=francecentral isZoneRedundant=False
-
-echo "Retrieving Cosmos DB Connection String";
-
-
+    --settings \
+        APPINSIGHTS_KEY="$aikey" \
+        COSMOSDB_PRIMARY_CONNECTION_STRING="${COSMOSDB_PRIMARY_CONNECTION_STRING}"
 
 echo "Done."

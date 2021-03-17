@@ -1,3 +1,4 @@
+import os
 import motor.motor_asyncio
 from bson.objectid import ObjectId
 
@@ -6,13 +7,14 @@ from bson.objectid import ObjectId
 # MONGO_PASSWORD = "drUKspy5OUB7IBWzNFirZax71kLHaUDQvwVuBNawz6TMld7smtXEEBEQdgHOsgjdNa3AKCOSbN5Q2SrAnQtrXQ=="
 
 
-MONGO_DETAILS = (
-    "mongodb://cdb-everie-ycoteststartup-script"
-    ":drUKspy5OUB7IBWzNFirZax71kLHaUDQvwVuBNawz6TMld7smtXEEBEQdgHOsgjdNa3AKCOSbN5Q2SrAnQtrXQ=="
-    "@cdb-everie-ycoteststartup-script.mongo.cosmos.azure.com:10255"
-    "/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000"
-    "&appName=@cdb-everie-ycoteststartup-script@"
-)
+# MONGO_DETAILS = (
+#     "mongodb://cdb-everie-ycoteststartup-script"
+#     ":drUKspy5OUB7IBWzNFirZax71kLHaUDQvwVuBNawz6TMld7smtXEEBEQdgHOsgjdNa3AKCOSbN5Q2SrAnQtrXQ=="
+#     "@cdb-everie-ycoteststartup-script.mongo.cosmos.azure.com:10255"
+#     "/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000"
+#     "&appName=@cdb-everie-ycoteststartup-script@"
+# )
+MONGO_DETAILS = os.getenv("COSMOSDB_PRIMARY_CONNECTION_STRING")
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 database = client.drops
 pschit_collection = database.get_collection("pschit")
