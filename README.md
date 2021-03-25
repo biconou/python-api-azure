@@ -1,29 +1,84 @@
 
-# Documentation
+# Introduction
 
-This sample is based on : https://docs.microsoft.com/fr-fr/samples/azure-samples/azure-sql-db-python-rest-api/azure-sql-db-python-rest-api/
+Ce code est basé sur : https://docs.microsoft.com/fr-fr/samples/azure-samples/azure-sql-db-python-rest-api/azure-sql-db-python-rest-api/
+
+
+# Instruction pour les développeurs
+
 
 ## Installer AZURE cli
 
+## Initialiser l'environnement
 
-## Create a virtual environment
+Après avoir cloné le repo il faut initialiser l'environnement en lançant le script
 
 ```
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+./install.sh
 ```
 
-## Créer l'application dans AZURE
+Le fichier .pre-commit-config.yaml est untlise
 
-./azure-deploy.sh
+
+## lancer l'application
+
+Il faut d'abord charger les variables d'environnement locales pour l'interaction avec la base de donnée MongoDB
+```
+./env-local.sh
+```
+
+Puis lancer le script de démarrage
+```
+./startup.sh
+```
+
+# Déploiement sur AZURE
+
+## Se loguer sur AZURE
+```
+az login
+```
+
+## Initialiser les variables d'environnement et la souscription courante
+```
+./env-azure.sh
+```
+
+## Créer le groupe de ressources
+```
+./azure-rg.sh
+```
+
+## Créer le compte CosmosDB
+
+Le nom du compte CosmosDB se trouve dans la variable d'environnement __${dbName}__
+
+Dans le portail AZURE créer un compte Cosmos DB en s'inspirant de la compie d'écrans suivante :
+
+![](./docs/ecran-creation-cosmodb.png)
+
+Créer la collection en lançant le script suivant
+
+```
+./azure-cosmodb.sh
+```
+
+Documentation sur la chaine de connextion
+https://docs.microsoft.com/en-us/azure/cosmos-db/scripts/cli/common/keys
+
+## Déployer l'application
+
+```
+./azure-app.sh
+```
+
+## Paramétrer l'application
+
+Voir la documentation suivante :
+https://docs.microsoft.com/en-us/azure/app-service/configure-common#application-settings
+
 
 ## Mettre à jour l'application
 
 - Dans le portail AZURE aller sur l'application puis dans le "Centre de déploiement"
 - Cliquer sur Redéployer/synchroniser
-
-
-
-
-

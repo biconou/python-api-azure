@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "drop-api"
+version = "0.1.0"
+description = "DROP API Backend"
+authors = ["Remi Cocula <rcocula@palo-it.com", "Yoann Couble <ycouble@palo-it.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.7"
+fastapi = "^0.63.0"
+uvicorn = "^0.13.4"
+pymongo = "^3.11.3"
+pydantic = "^1.8.1"
+motor = "^2.3.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.2"
+black = "^20.8b1"
+pre-commit = "^2.11.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
