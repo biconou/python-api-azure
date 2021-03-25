@@ -17,11 +17,17 @@ Après avoir cloné le repo il faut initialiser l'environnement en lançant le s
 ./install.sh
 ```
 
-Le fichier .pre-commit-config.yaml est untlise 
+Le fichier .pre-commit-config.yaml est untlise
 
 
 ## lancer l'application
 
+Il faut d'abord charger les variables d'environnement locales pour l'interaction avec la base de donnée MongoDB
+```
+./env-local.sh
+```
+
+Puis lancer le script de démarrage
 ```
 ./startup.sh
 ```
@@ -47,7 +53,7 @@ az login
 
 Le nom du compte CosmosDB se trouve dans la variable d'environnement __${dbName}__
 
-Dans le portail AZURE créer un compte Cosmos DB en s'inspirant de la compie d'écrans suivante : 
+Dans le portail AZURE créer un compte Cosmos DB en s'inspirant de la compie d'écrans suivante :
 
 ![](./docs/ecran-creation-cosmodb.png)
 
@@ -66,9 +72,9 @@ https://docs.microsoft.com/en-us/azure/cosmos-db/scripts/cli/common/keys
 ./azure-app.sh
 ```
 
-## Paramétrer l'application 
+## Paramétrer l'application
 
-Voir la documentation suivante : 
+Voir la documentation suivante :
 https://docs.microsoft.com/en-us/azure/app-service/configure-common#application-settings
 
 
