@@ -13,5 +13,5 @@ export location="francecentral"
 
 
 # Sélection de l'abonnement à utiliser
-export subscriptionId="72d0710a-c7cd-4924-9e3f-8a8272e2515a" # id de la souscription everie
+export subscriptionId="a9fb73c8-d5b0-4bb7-812a-9da746a410e4" # id de la souscription everie
 az account set -s ${subscriptionId}
