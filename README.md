@@ -36,12 +36,12 @@ Puis lancer le script de démarrage
 
 ## Se loguer sur AZURE
 ```
-az login
+az login --tenant eadd0adf-e413-414f-a21a-86169869dcb1
 ```
 
 ## Initialiser les variables d'environnement et la souscription courante
 ```
-./env-azure.sh
+. ./env-azure.sh
 ```
 
 ## Créer le groupe de ressources
