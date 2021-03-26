@@ -2,9 +2,8 @@
 
 export gitSource="https://github.com/biconou/python-api-azure.git"
 gitBranch=`git branch --show-current`
-echo ${gitBranch}
 export gitBranchSlug=`echo ${gitBranch} | tr -d '/'`
-echo ${gitBranchSlug}
+echo "gitBranchSlug=${gitBranchSlug}"
 
 export resourceGroup="everie-${gitBranchSlug}-rg"
 export appName="drop-api-${gitBranchSlug}"
