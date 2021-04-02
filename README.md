@@ -72,10 +72,28 @@ https://docs.microsoft.com/en-us/azure/cosmos-db/scripts/cli/common/keys
 ./azure-app.sh
 ```
 
-## Paramétrer l'application
+## Activer l'authentification AZURE AD
 
-Voir la documentation suivante :
-https://docs.microsoft.com/en-us/azure/app-service/configure-common#application-settings
+Tout d'abord il faut inscrire l'application auprès de l'annuaire AD. C'est expliqué ici : https://docs.microsoft.com/fr-fr/azure/active-directory/develop/scenario-web-app-sign-user-app-registration?tabs=aspnetcore
+
+Dans le portail d'administration, sous AZURE Active Directory, aller dans le "Gérer > Inscription d'application"
+
+Cliqer sur "+ Nouvelle inscription"
+
+- Saisir le nom "everie-drop-api"
+- Cocher "Comptes dans cet annuaire d'organisation uniquement (Répertoire par défaut uniquement - Locataire unique)"
+
+Ensuite cliquer sur "Certificats & secrets" et "+ Nouveau secret client"
+Noter la valeur du secret
+
+Ensuite il faut aller dans le paramétrage de l'application et choisir le menu "Authentification / Autorisation"
+
+Cliquer sur "Activé"
+puis dans la liste déroulante "Action à exécuter quand une demande n'est pas authentifiée" choisir "Se connecter avec Azure Active Directory"
+
+Dans "Paramètres Azure Active Directory" choisir le mode express et "Sélectionner une application AD existante". Choisir alors l'application everie-drop-api.
+
+
 
 
 ## Mettre à jour l'application
