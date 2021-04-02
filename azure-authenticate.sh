@@ -2,14 +2,10 @@
 
 . ./env-azure.sh
 
-echo ${clientId}
-
-applicationId="0077cc8c-b2a3-4ec0-bd91-784fdf4f5f3d"
-
 response=$(curl --location --request POST "https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token" \
     --header 'Content-Type: application/x-www-form-urlencoded' \
     --data-urlencode "client_id=${clientId}" \
-    --data-urlencode "scope=${applicationId}/.default" \
+    --data-urlencode "scope=${clientId}/.default" \
     --data-urlencode "client_secret=${clientSecret}" \
     --data-urlencode 'username=DROP-5EFF56A2AF15@everie.com' \
     --data-urlencode 'password=g5fQO3NgOwz0Wnab2pRv' \
