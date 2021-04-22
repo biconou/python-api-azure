@@ -2,19 +2,20 @@ from motor.motor_asyncio import AsyncIOMotorDatabase as DataBase  # noqa
 from fastapi import APIRouter, Depends
 
 
-from ..database import get_db
+from ..database import get_db, DEFAULT_CONFIG, DEFAULT_CONFIG_NAME
 from ..models.versions import VersionsRespSchema
 
 versions_router = APIRouter()
 
 
 @versions_router.get("/", status_code=200, response_model=VersionsRespSchema)
-async def add_events_data(drop: str, db: DataBase = Depends(get_db)):
+async def get_versions(drop: str, db: DataBase = Depends(get_db)):
     collection = db.get_collection("drops")
     # Get the generic versions
-    default_versions = await collection.find_one({"drop": "generic"})
+    # TODO: clean this (factorize)
+    default_versions = await collection.find_one({"drop": DEFAULT_CONFIG_NAME})
     if default_versions is None:
-        default_versions = {"drop": "generic", "config": "0", "firmware": "0"}
+        default_versions = DEFAULT_CONFIG
     # Try to retrieve specific versions if they exist
     versions = await collection.find_one({"drop": drop})
     if versions is None:
