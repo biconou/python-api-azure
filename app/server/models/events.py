@@ -2,9 +2,17 @@ from typing import List
 from pydantic import BaseModel, Field
 
 
+class EventSchema(BaseModel):
+    time: str = Field(None)
+    type: str = Field(None)
+
+    class Config:
+        extra = "allow"
+
+
 class EventsSchema(BaseModel):
     drop: str = Field(...)
-    data: List[dict] = Field(...)
+    data: List[EventSchema] = Field(...)
 
     class Config:
         schema_extra = {
@@ -29,3 +37,16 @@ class EventsSchema(BaseModel):
                 ],
             }
         }
+
+
+class EventDBSchema(BaseModel):
+    time: str = Field(...)
+    type: str = Field(...)
+    drop: str = Field(...)
+
+    class Config:
+        extra = "allow"
+
+    @classmethod
+    def from_event(cls, event: EventSchema, drop: str):
+        return cls(**event.dict(), drop=drop)

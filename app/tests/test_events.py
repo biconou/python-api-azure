@@ -28,7 +28,7 @@ def test_nominal(client, db, drop, data):
         from_db = do_find_one(collection, {"_id": ObjectId(_id)})
         assert from_db is not None
         assert from_db["drop"] == drop
-        assert from_db["time"] == event["time"]
+        assert from_db["time"] == str(event["time"])
         for field in event.keys():
             assert field in from_db
 
@@ -89,4 +89,4 @@ def test_best_effort(client, db, caplog, missing_field):
     assert do_find_one(collection, {"type": "CorrectBefore"}) is not None
     assert do_find_one(collection, {"type": "CorrectAfter"}) is not None
     # A Warning log has been emitted with the event content
-    assert str(incorrect_event) in caplog.text
+    assert str(incorrect_event)[1:-2] in caplog.text
