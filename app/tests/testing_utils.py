@@ -13,3 +13,9 @@ def perform(func):
 async def do_find_one(collection, query):
     document = await collection.find_one(query)
     return document
+
+
+@perform
+async def do_insert_one(collection, data):
+    document = await collection.insert_one(data)
+    return document
