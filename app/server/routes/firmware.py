@@ -36,7 +36,7 @@ async def add_firmware(
     result = await config_collection.insert_one(
         {"name": name, "firmware": bson.binary.Binary(file)}
     )
-    return str(result)
+    return str(result.inserted_id)
 
 
 @firmware_router.get("/", summary="Retrieve a firmware file")
@@ -49,4 +49,4 @@ async def get_firmware(name: str, db: DataBase = Depends(get_db)):
     firmware_file = io.BytesIO(firmware["firmware"])
     firmware_file.name = firmware["name"]
 
-    return StreamingResponse(firmware_file)
+    return StreamingResponse(firmware_file, media_type="application/octet-stream")
