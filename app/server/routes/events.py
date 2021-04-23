@@ -11,7 +11,7 @@ from ..models.common import response_model
 events_router = APIRouter()
 
 
-@events_router.post("/", status_code=200)
+@events_router.post("/", summary="Send multiple events for a given drop")
 async def add_events_data(
     events_struct: EventsSchema = Body(...), db: DataBase = Depends(get_db)
 ):

@@ -10,7 +10,11 @@ from ..models.common import response_model
 versions_router = APIRouter()
 
 
-@versions_router.get("/", status_code=200, response_model=VersionsRespSchema)
+@versions_router.get(
+    "/",
+    summary="Retrieve firmware and config versions for a given drop",
+    response_model=VersionsRespSchema,
+)
 async def get_versions(drop: str, db: DataBase = Depends(get_db)):
     collection = db.get_collection("drops")
     # Get the generic versions
@@ -27,11 +31,10 @@ async def get_versions(drop: str, db: DataBase = Depends(get_db)):
     return VersionsRespSchema(**versions)
 
 
-@versions_router.post("/")
+@versions_router.post("/", summary="Set firmware and config versions for several drops")
 async def set_versions(
     body: DropPostSchema = Body(...), db: DataBase = Depends(get_db)
 ):
-    """Set versions for several drops"""
     # Over-quality
     # if body.config is not None:
     #     config_collection = db.get_collection("configs")

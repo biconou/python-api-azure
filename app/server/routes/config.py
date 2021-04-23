@@ -10,7 +10,7 @@ from ..models.config import ConfigDBSchema, ConfigRespSchema
 config_router = APIRouter()
 
 
-@config_router.post("/")
+@config_router.post("/", summary="Upload a configuration json")
 async def add_config(
     config: ConfigDBSchema = Body(...), db: DataBase = Depends(get_db)
 ):
@@ -23,7 +23,9 @@ async def add_config(
     return str(result.inserted_id)
 
 
-@config_router.get("/", response_model=ConfigRespSchema)
+@config_router.get(
+    "/", summary="Retrieve a configuration json", response_model=ConfigRespSchema
+)
 async def get_config(name: str, db: DataBase = Depends(get_db)):
     config_collection = db.get_collection("configs")
     config_res = await config_collection.find_one({"name": name})

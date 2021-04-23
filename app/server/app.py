@@ -13,7 +13,7 @@ app.include_router(config_router, tags=["Config"], prefix="/config")
 app.include_router(firmware_router, tags=["Firmware"], prefix="/firmware")
 
 
-@app.get("/", tags=["Root"])
+@app.get("/", summary="Root endpoint", tags=["Root"])
 async def read_root():
     """Default route to avoid a 404 after login on browser"""
     return {"message": "ok"}

@@ -11,7 +11,7 @@ from ..database import get_db
 firmware_router = APIRouter()
 
 
-@firmware_router.get("/upload_form/")
+@firmware_router.get("/upload_form/", summary="Get the firmware upload HTML form")
 async def get_firmware_upload_form():
     content = """
         <body>
@@ -25,7 +25,7 @@ async def get_firmware_upload_form():
     return HTMLResponse(content=content)
 
 
-@firmware_router.post("/")
+@firmware_router.post("/", summary="Upload a firmware file")
 async def add_firmware(
     file: bytes = File(...), name: str = Form(...), db: DataBase = Depends(get_db)
 ):
@@ -39,7 +39,7 @@ async def add_firmware(
     return str(result)
 
 
-@firmware_router.get("/")
+@firmware_router.get("/", summary="Retrieve a firmware file")
 async def get_firmware(name: str, db: DataBase = Depends(get_db)):
     firmwares_collection = db.get_collection("firmwares")
     firmware = await firmwares_collection.find_one({"name": name})
