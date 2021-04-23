@@ -1,6 +1,6 @@
 import pytest
 
-from .testing_utils import do_find_one
+from .testing_utils import do_find_one, do_insert_one
 
 
 @pytest.mark.parametrize(
@@ -48,4 +48,48 @@ def test_post_missing_field(client, missing):
     assert resp.status_code == 422
 
 
-# TODO: test for get nominal (with/without generic) / error
+@pytest.mark.parametrize("specific", [True, False])
+def test_get_has_specific(client, db, specific):
+    data = {
+        "drop": "test" if specific else "generic",
+        "config": "test-config",
+        "firmware": "",
+    }
+    config = {"version": "test-config", "config": {"a": "a"}}
+    do_insert_one(db.get_collection("drops"), data)
+    do_insert_one(db.get_collection("configs"), config)
+    resp = client.get("/config/", params={"drop": "test"})
+    assert resp.status_code == 200
+    assert resp.json()["config"] == config["config"]
+
+
+def test_specific_over_generic(client, db):
+    data = {"drop": "test", "config": "test-config", "firmware": ""}
+    data_gen = {"drop": "generic", "config": "generic-config", "firmware": ""}
+    config = {"version": "test-config", "config": {"a": "a"}}
+    config_gen = {"version": "generic-config", "config": {"b": "b"}}
+    do_insert_one(db.get_collection("drops"), data)
+    do_insert_one(db.get_collection("drops"), data_gen)
+    do_insert_one(db.get_collection("configs"), config)
+    do_insert_one(db.get_collection("configs"), config_gen)
+    resp = client.get("/config/", params={"drop": "test"})
+    assert resp.status_code == 200
+    assert resp.json()["config"] == config["config"]
+
+
+def test_missing_drop_param(client):
+    resp = client.get("/config/")
+    assert resp.status_code == 422
+
+
+@pytest.mark.parametrize("specific", [True, False])
+def test_missing_config(client, db, specific):
+    data = {
+        "drop": "test" if specific else "generic",
+        "config": "test-config",
+        "firmware": "",
+    }
+    do_insert_one(db.get_collection("drops"), data)
+    resp = client.get("/config/", params={"drop": "test"})
+    assert resp.status_code == 404
+    assert resp.json()["detail"] == "Configuration test-config for drop test not found"
