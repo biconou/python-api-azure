@@ -20,7 +20,7 @@ Après avoir cloné le repo il faut initialiser l'environnement en lançant le s
 Le fichier .pre-commit-config.yaml est untlise
 
 
-## lancer l'application
+## Lancer l'application
 
 Il faut d'abord charger les variables d'environnement locales pour l'interaction avec la base de donnée MongoDB
 ```
@@ -30,6 +30,20 @@ Il faut d'abord charger les variables d'environnement locales pour l'interaction
 Puis lancer le script de démarrage
 ```
 ./startup.sh
+```
+
+## Tester l'application
+
+Il faut d'abord installer les dépendances de dev:
+```
+poetry install
+```
+Il est nécessaire également d'avoir mongodb d'installé, cf https://docs.mongodb.com/manual/installation/.
+
+Ensuite, pour lancer les tests automatiques:
+```
+cd app/
+poetry run pytest
 ```
 
 # Déploiement sur AZURE
