@@ -10,6 +10,12 @@ def perform(func):
 
 
 @perform
+async def do_find(collection, query):
+    documents = await collection.find(query).to_list(None)
+    return documents
+
+
+@perform
 async def do_find_one(collection, query):
     document = await collection.find_one(query)
     return document

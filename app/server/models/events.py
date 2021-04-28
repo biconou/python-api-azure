@@ -40,8 +40,8 @@ class EventsSchema(BaseModel):
 
 
 class EventDBSchema(BaseModel):
-    time: str = Field(...)
-    type: str = Field(...)
+    time: str = Field(None)
+    type: str = Field(None)
     drop: str = Field(...)
 
     class Config:
