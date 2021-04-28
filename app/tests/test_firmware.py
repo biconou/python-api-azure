@@ -1,11 +1,14 @@
 import bson
 import io
 import os
+
 import pytest
+import pymongo
 
 from .testing_utils import do_find_one, do_insert_one
 
 
+@pytest.mark.slow
 @pytest.mark.parametrize(
     "content",
     [
@@ -25,6 +28,17 @@ def test_post_nominal(client, db, content):
     from_db = do_find_one(config_collection, {"name": name})
     assert from_db["name"] == name
     assert from_db["firmware"] == content
+
+
+def test_post_too_large(client):
+    """
+    Known limitation: binary files are directly stored in the DB,
+    and limited to 16MB
+    """
+    name = "test-firmware.txt"
+    file = io.BytesIO(os.urandom(20_000_000))
+    with pytest.raises(pymongo.errors.DocumentTooLarge):
+        client.post("/firmware/", data={"name": name}, files={"file": file})
 
 
 @pytest.mark.parametrize("data", [dict(filename="test")], ids=["missing_name"])
