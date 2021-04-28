@@ -46,6 +46,13 @@ cd app/
 poetry run pytest
 ```
 
+## Installer les hooks de pre-commit
+
+Une fois l'installation des dépendances de dev faite, il suffit de lancer la commande pre-commit:
+```
+poetry run pre-commit install
+```
+
 # Déploiement sur AZURE
 
 ## Se loguer sur AZURE
